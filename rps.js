@@ -1,19 +1,26 @@
-let humanScore = 0;
-let computerScore = 0;
-let currentRound = 0;
-const maxRounds = 5;
+let humanScore;
+let computerScore;
 
-while(currentRound < maxRounds) {
-    let winner = playRound();
-    addRound = winner!=="Nobody";
-    if(addRound) currentRound++;
+playGame(5);
+
+function playGame(rounds) {
+    humanScore = 0;
+    computerScore = 0;
+    let currentRound = 0;
+    const maxRounds = rounds;
+    
+    while(currentRound < maxRounds) {
+        let winner = playRound();
+        addRound = winner!=="Nobody";
+        if(addRound) currentRound++;
+    }
+    
+    let outcome = (humanScore>computerScore) ? "won" : "lost";
+    
+    alert(`Game is finished!
+        Final score is ${humanScore}:${computerScore} (You:Computer).
+        You ${outcome}!`);
 }
-
-let outcome = (humanScore>computerScore) ? "won" : "lost";
-
-alert(`Game is finished!
-    Final score is ${humanScore}:${computerScore} (You:Computer).
-    You ${outcome}!`);
 
 function playRound() {
     let computerChoice = getComputerChoice();
