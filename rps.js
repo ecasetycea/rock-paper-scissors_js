@@ -1,3 +1,7 @@
+humanScore = 0;
+computerScore = 0;
+
+
 function getComputerChoice() {
     pick = Math.floor(Math.random()*3);
 
