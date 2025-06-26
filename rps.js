@@ -18,7 +18,9 @@ function getComputerChoice() {
 function getHumanChoice() {
     while(true) {
         choice = prompt("Enter your choice from 'rock', 'paper' and 'scissors'");
-        if(choice==="rock" || choice==="paper" || choice==="scissors") return choice;
+        if(choice.toLowerCase()==="rock" || choice.toLowerCase()==="paper" || choice.toLowerCase()==="scissors") {
+            return choice.toLowerCase();
+        }
         alert("Please enter a valid choice")
     }
 }
