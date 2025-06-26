@@ -1,6 +1,33 @@
 humanScore = 0;
 computerScore = 0;
 
+function playRound() {
+    computerChoice = getComputerChoice();
+    humanChoice = getHumanChoice();
+    comparison = humanChoice + "_" + computerChoice;
+    let winner;
+
+    switch(comparison) {
+        case "rock_scissors":
+        case "scissors_paper":
+        case "paper_rock":
+            winner = "You";
+            humanScore++;
+            break;
+        case "scissors_rock":
+        case "paper_scissors":
+        case "rock_paper":
+            winner = "The computer";
+            computerScore++
+            break;
+        default:
+            winner = "Nobody";
+    }
+
+    alert(`You played ${humanChoice} and the computer played ${computerChoice}.
+        ${winner} won this round!.
+        The score now is ${humanScore}:${computerScore} (You:Computer).`);
+}
 
 function getComputerChoice() {
     pick = Math.floor(Math.random()*3);
