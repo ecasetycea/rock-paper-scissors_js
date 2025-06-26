@@ -1,10 +1,24 @@
-humanScore = 0;
-computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
+let currentRound = 0;
+const maxRounds = 5;
+
+while(currentRound < maxRounds) {
+    let winner = playRound();
+    addRound = winner!=="Nobody";
+    if(addRound) currentRound++;
+}
+
+let outcome = (humanScore>computerScore) ? "won" : "lost";
+
+alert(`Game is finished!
+    Final score is ${humanScore}:${computerScore} (You:Computer).
+    You ${outcome}!`);
 
 function playRound() {
-    computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
-    comparison = humanChoice + "_" + computerChoice;
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+    let comparison = humanChoice + "_" + computerChoice;
     let winner;
 
     switch(comparison) {
@@ -27,6 +41,8 @@ function playRound() {
     alert(`You played ${humanChoice} and the computer played ${computerChoice}.
         ${winner} won this round!.
         The score now is ${humanScore}:${computerScore} (You:Computer).`);
+
+    return winner;
 }
 
 function getComputerChoice() {
