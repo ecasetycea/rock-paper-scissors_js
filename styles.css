@@ -5,6 +5,16 @@ body {
 .game {
     height: 400px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+}
+
+button {
+    padding: 5px 20px;
+}
+
+.reset {
+    padding: 10px 30px;
+    margin: 30px;
 }

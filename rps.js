@@ -1,5 +1,7 @@
+const resetBtn = document.querySelector(".reset");
 const buttons = document.querySelector(".buttons");
 
+resetBtn.addEventListener("click", () => reset());
 buttons.addEventListener("click", (e) => {
     let target = e.target;
     let choice = ''
@@ -22,20 +24,20 @@ buttons.addEventListener("click", (e) => {
 
 let humanScore;
 let computerScore;
+let gameEnded;
 init();
+
+
 
 function init() {
     humanScore = 0;
     computerScore = 0;
+    gameEnded = false;
 }
 
-function doEnd() {
-    let outcome = (humanScore>computerScore) ? "won" : "lost";
-    
-    alert(`Game is finished!
-        Final score is ${humanScore}:${computerScore} (You:Computer).
-        You ${outcome}!`);
-
+function reset() {
+    init();
+    alert("Game has been reset!");
 }
 
 function checkEnd() {
@@ -43,9 +45,22 @@ function checkEnd() {
     return false;
 }
 
-function playRound(choice) {
-    if(checkEnd()) doEnd();
+function doEnd() {
+    let outcome = (humanScore>computerScore) ? "won" : "lost";
+    gameEnded = true;
+    
+    alert(`Game is finished!
+        Final score is ${humanScore}:${computerScore} (You:Computer).
+        You ${outcome}!
+        Reset to play again.`);
+}
 
+function playRound(choice) {
+    if(gameEnded) {
+        alert("Game has already ended!!");
+        return;
+    }
+    
     let computerChoice = getComputerChoice();
     let comparison = choice + "_" + computerChoice;
     let winner;
@@ -71,7 +86,7 @@ function playRound(choice) {
         ${winner} won this round!.
         The score now is ${humanScore}:${computerScore} (You:Computer).`);
 
-    return winner;
+    if(checkEnd()) doEnd();
 }
 
 function getComputerChoice() {
