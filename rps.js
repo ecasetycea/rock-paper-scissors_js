@@ -1,5 +1,8 @@
 const resetBtn = document.querySelector(".reset");
 const buttons = document.querySelector(".buttons");
+const pScoreElem = document.querySelector("#playerScore");
+const cScoreElem = document.querySelector("#computerScore");
+const announcements = document.querySelector(".announcements");
 
 resetBtn.addEventListener("click", () => reset());
 buttons.addEventListener("click", (e) => {
@@ -22,7 +25,7 @@ buttons.addEventListener("click", (e) => {
 } );
 
 
-let humanScore;
+let playerScore;
 let computerScore;
 let gameEnded;
 init();
@@ -30,9 +33,10 @@ init();
 
 
 function init() {
-    humanScore = 0;
+    playerScore = 0;
     computerScore = 0;
     gameEnded = false;
+    displayScores();
 }
 
 function reset() {
@@ -41,18 +45,25 @@ function reset() {
 }
 
 function checkEnd() {
-    if(Math.max(humanScore, computerScore)===5) return true;
+    if(Math.max(playerScore, computerScore)===5) return true;
     return false;
 }
 
 function doEnd() {
-    let outcome = (humanScore>computerScore) ? "won" : "lost";
+    let outcome = (playerScore>computerScore) ? "won" : "lost";
     gameEnded = true;
     
     alert(`Game is finished!
-        Final score is ${humanScore}:${computerScore} (You:Computer).
+        Final score is ${playerScore}:${computerScore} (You:Computer).
         You ${outcome}!
         Reset to play again.`);
+}
+    
+function displayScores(roundWinner = '') {
+    pScoreElem.textContent = playerScore.toString();
+    cScoreElem.textContent = computerScore.toString();
+    if(roundWinner==='') return;
+    announcements.textContent = `${roundWinner} won the Round!`;
 }
 
 function playRound(choice) {
@@ -70,7 +81,7 @@ function playRound(choice) {
         case "scissors_paper":
         case "paper_rock":
             winner = "You";
-            humanScore++;
+            playerScore++;
             break;
         case "scissors_rock":
         case "paper_scissors":
@@ -82,10 +93,7 @@ function playRound(choice) {
             winner = "Nobody";
     }
 
-    alert(`You played ${choice} and the computer played ${computerChoice}.
-        ${winner} won this round!.
-        The score now is ${humanScore}:${computerScore} (You:Computer).`);
-
+    displayScores(winner);
     if(checkEnd()) doEnd();
 }
 
