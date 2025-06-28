@@ -60,7 +60,7 @@ function playRound(choice) {
         alert("Game has already ended!!");
         return;
     }
-    
+
     let computerChoice = getComputerChoice();
     let comparison = choice + "_" + computerChoice;
     let winner;
@@ -90,7 +90,7 @@ function playRound(choice) {
 }
 
 function getComputerChoice() {
-    pick = Math.floor(Math.random()*3);
+    pick = Math.floor(Math.random()*100) % 3;
 
     switch(pick) {
         case 0:
