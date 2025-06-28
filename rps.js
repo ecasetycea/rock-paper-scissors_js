@@ -36,12 +36,13 @@ function init() {
     playerScore = 0;
     computerScore = 0;
     gameEnded = false;
+    announcements.textContent = "Good Luck!";
     displayScores();
 }
 
 function reset() {
     init();
-    alert("Game has been reset!");
+    announcements.textContent = "Game reset. Good Luck!";
 }
 
 function checkEnd() {
@@ -52,11 +53,7 @@ function checkEnd() {
 function doEnd() {
     let outcome = (playerScore>computerScore) ? "won" : "lost";
     gameEnded = true;
-    
-    alert(`Game is finished!
-        Final score is ${playerScore}:${computerScore} (You:Computer).
-        You ${outcome}!
-        Reset to play again.`);
+    announcements.textContent = `Game is finished, you ${outcome}!`
 }
     
 function displayScores(roundWinner = '') {
@@ -68,7 +65,7 @@ function displayScores(roundWinner = '') {
 
 function playRound(choice) {
     if(gameEnded) {
-        alert("Game has already ended!!");
+        announcements.textContent = "Game has already ended. Do a reset."
         return;
     }
 
