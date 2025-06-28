@@ -3,16 +3,14 @@ let computerScore;
 
 playGame(5);
 
-function playGame(rounds) {
+function playGame() {
     humanScore = 0;
     computerScore = 0;
-    let currentRound = 0;
-    const maxRounds = rounds;
+    cont = true;
     
-    while(currentRound < maxRounds) {
+    while(true) {
         let winner = playRound();
-        addRound = winner!=="Nobody";
-        if(addRound) currentRound++;
+        if(Math.max(humanScore, computerScore)===5) break;
     }
     
     let outcome = (humanScore>computerScore) ? "won" : "lost";
