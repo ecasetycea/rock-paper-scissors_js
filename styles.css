@@ -1,0 +1,10 @@
+body {
+    background-color: #333;
+}
+
+.game {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,29 +1,53 @@
+const buttons = document.querySelector(".buttons");
+
+buttons.addEventListener("click", (e) => {
+    let target = e.target;
+    let choice = ''
+    
+    switch(target.id) {
+        case "rock":
+            choice = "rock";
+            break;
+        case "paper":
+            choice = "paper";
+            break;
+        case "scissors":
+            choice = "scissors";
+            break;
+    }
+
+    playRound(choice);
+} );
+
+
 let humanScore;
 let computerScore;
+init();
 
-playGame(5);
-
-function playGame() {
+function init() {
     humanScore = 0;
     computerScore = 0;
-    cont = true;
-    
-    while(true) {
-        let winner = playRound();
-        if(Math.max(humanScore, computerScore)===5) break;
-    }
-    
+}
+
+function doEnd() {
     let outcome = (humanScore>computerScore) ? "won" : "lost";
     
     alert(`Game is finished!
         Final score is ${humanScore}:${computerScore} (You:Computer).
         You ${outcome}!`);
+
 }
 
-function playRound() {
+function checkEnd() {
+    if(Math.max(humanScore, computerScore)===5) return true;
+    return false;
+}
+
+function playRound(choice) {
+    if(checkEnd()) doEnd();
+
     let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
-    let comparison = humanChoice + "_" + computerChoice;
+    let comparison = choice + "_" + computerChoice;
     let winner;
 
     switch(comparison) {
@@ -43,7 +67,7 @@ function playRound() {
             winner = "Nobody";
     }
 
-    alert(`You played ${humanChoice} and the computer played ${computerChoice}.
+    alert(`You played ${choice} and the computer played ${computerChoice}.
         ${winner} won this round!.
         The score now is ${humanScore}:${computerScore} (You:Computer).`);
 
@@ -60,15 +84,5 @@ function getComputerChoice() {
             return "paper";
         case 2:
             return "scissors";
-    }
-}
-
-function getHumanChoice() {
-    while(true) {
-        choice = prompt("Enter your choice from 'rock', 'paper' and 'scissors'");
-        if(choice.toLowerCase()==="rock" || choice.toLowerCase()==="paper" || choice.toLowerCase()==="scissors") {
-            return choice.toLowerCase();
-        }
-        alert("Please enter a valid choice")
     }
 }
