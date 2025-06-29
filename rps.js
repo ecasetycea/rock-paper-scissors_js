@@ -2,6 +2,8 @@ const resetBtn = document.querySelector(".reset");
 const buttons = document.querySelector(".buttons");
 const pScoreElem = document.querySelector("#playerScore");
 const cScoreElem = document.querySelector("#computerScore");
+const pMoveElem = document.querySelector("#playerMove");
+const cMoveElem = document.querySelector("#computerMove");
 const announcements = document.querySelector(".announcements");
 
 resetBtn.addEventListener("click", () => reset());
@@ -35,6 +37,8 @@ init();
 function init() {
     playerScore = 0;
     computerScore = 0;
+    pMoveElem.textContent = '';
+    cMoveElem.textContent = '';
     gameEnded = false;
     announcements.textContent = "Good Luck!";
     displayScores();
@@ -61,6 +65,11 @@ function displayScores(roundWinner = '') {
     cScoreElem.textContent = computerScore.toString();
     if(roundWinner==='') return;
     announcements.textContent = `${roundWinner} won the Round!`;
+}
+
+function displayChoices(playerChoice, computerChoice) {
+    pMoveElem.textContent = playerChoice;
+    cMoveElem.textContent = computerChoice;
 }
 
 function playRound(choice) {
@@ -91,6 +100,7 @@ function playRound(choice) {
     }
 
     displayScores(winner);
+    displayChoices(choice, computerChoice);
     if(checkEnd()) doEnd();
 }
 
